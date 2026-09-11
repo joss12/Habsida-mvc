@@ -67,14 +67,27 @@
             color: #2563eb;
         }
 
-        .delete {
+        .delete-button {
+            background: none;
+            border: none;
             color: #dc2626;
+            cursor: pointer;
+            padding: 0;
+            font: inherit;
         }
 
         .empty {
             text-align: center;
             color: #777;
             padding: 30px;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 18px;
         }
     </style>
 </head>
@@ -87,9 +100,15 @@
         <h1>Users</h1>
 
         <a class="add-button"
+           href="/users/new"
            th:href="@{/users/new}">
             + Add User
         </a>
+    </div>
+
+    <div th:if="${errorMessage}"
+         class="error-message"
+         th:text="${errorMessage}">
     </div>
 
     <table>
@@ -118,10 +137,16 @@
                     Edit
                 </a>
 
-                <a class="delete"
-                   th:href="@{/users/delete/{id}(id=${user.id})}">
-                    Delete
-                </a>
+                <form th:action="@{/users/delete/{id}(id=${user.id})}"
+                      method="post"
+                      style="display: inline;">
+
+                    <button type="submit"
+                            class="delete-button">
+                        Delete
+                    </button>
+
+                </form>
             </td>
         </tr>
 
