@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            margin-top: 24px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            background: #222;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .cancel {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: #e5e7eb;
+            color: #222;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 th:text="${user.id == null ? 'Add User' : 'Edit User'}">
+        User Form
+    </h1>
+
+    <form th:action="@{/users/save}"
+          th:object="${user}"
+          method="post">
+
+        <input type="hidden"
+               th:field="*{id}">
+
+        <div class="field">
+            <label for="firstName">First Name</label>
+
+            <input id="firstName"
+                   type="text"
+                   th:field="*{firstName}"
+                   required>
+        </div>
+
+        <div class="field">
+            <label for="lastName">Last Name</label>
+
+            <input id="lastName"
+                   type="text"
+                   th:field="*{lastName}"
+                   required>
+        </div>
+
+        <div class="field">
+            <label for="email">Email</label>
+
+            <input id="email"
+                   type="email"
+                   th:field="*{email}"
+                   required>
+        </div>
+
+        <div class="buttons">
+
+            <button type="submit">
+                Save
+            </button>
+
+            <a class="cancel"
+               th:href="@{/users}">
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
