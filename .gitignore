@@ -1,6 +1,3 @@
-# Local database configuration
-src/main/resources/db.properties
-
 # IntelliJ
 .idea/
 *.iml
